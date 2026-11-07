@@ -4,20 +4,24 @@ Created on Fri Apr 17 16:37:51 2020
 
 @author: DELL
 """
+#librerias
 import sklearn.datasets as data
 import numpy as np
 import random
 
+#datos artificiales
 np.random.seed(100)
 random.seed(100)
 
     from sklearn.datasets import fetch_california_housing
     housing = fetch_california_housing()
 
+#definiendo variables
 X = housing['data']
 Y= housing['target']
 print(housing['DESCR'])
 
+#graficando datos
 import seaborn as sns
 import matplotlib.pyplot as plt
 
@@ -34,7 +38,7 @@ ax.set(xlabel='MedInc', ylabel=housing['target'],
 ax.grid()
 plt.show()
 
-#scatter
+#scatter, grafico de dispersion
 
 plt.scatter(housing.Medinc, housing.target)
 
@@ -49,13 +53,17 @@ sns.set_style('dark')
 plt.scatter(iris.sepal_length, iris.sepal_width)
 plt.show()
 
+#dividiendo el dataset en prueba y entrenamiento
+
 from sklearn.model_selection import train_test_split 
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.2, random_state = 0)
 
+#desarrollando un modelo de arbol
 from sklearn.tree import DecisionTreeRegressor
 regressor = DecisionTreeRegressor()
 regressor.fit(X_train, Y_train)
 
+#verificando las metricas del modelo creado
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 prediction = regressor.predict(X_test)
 prediction_2 = regressor.predict(X_train)
