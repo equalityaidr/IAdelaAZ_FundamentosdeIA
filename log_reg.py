@@ -5,7 +5,7 @@ Created on Thu May  7 08:08:44 2020
 @author: DELL
 """
 
-#Ejercicio Logistic Regression
+#Ejercicio Regresion Logistica o Logistic Regression
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -20,7 +20,7 @@ y = iris.target
 
 df= pd.DataFrame(iris.data, columns=iris.feature_names)
 
-#Data Mining
+#Data Mining o Mineria de Datos
 print("Printing first 10 features set")
 print(X[:10,:])
 print("--------------------------")
@@ -36,7 +36,7 @@ prof.to_file(output_file='output.html')
 unique, counts = np.unique(y, return_counts=True)
 dict(zip(unique, counts))
 
-#Scatter
+#Scatter plat o grafico de dispersion
 plt.figure(2, figsize=(8, 6))
 plt.clf()
 scatter = plt.scatter(X[:, 0], X[:, 1], c=y, cmap=plt.cm.Set1, edgecolor='k')
@@ -49,7 +49,7 @@ plt.show()
 new_y = y[:100]
 new_X = X[:100]
 
-#Scatter2
+#Scatter2 o dispersion 2
 plt.figure(2, figsize=(8, 6))
 plt.clf()
 scatter = plt.scatter(new_X[:, 0], new_X[:, 1], c=new_y,cmap=plt.cm.Set1, edgecolor='k')
@@ -58,12 +58,12 @@ plt.xlabel('Sepal length')
 plt.ylabel('Sepal width')
 plt.show()
 
-#train test split
+#train test split, separando la data en prueba y entrenamiento
 X_train,X_test,Y_train,Y_test=train_test_split(new_X,new_y,test_size=0.2,random_state=0)
 print(X_train.shape,X_test.shape)
 print(Y_train.shape,Y_test.shape)
 
-#Logistic Regression
+#Logistic Regression o regresion logistica
 logreg = LogisticRegression(solver='lbfgs', C=0.12)
 logreg.fit(X_train,Y_train)
 
@@ -77,19 +77,19 @@ predict_y = logreg.predict(X_test)
 
 
 
-#Accuracy
+#Accuracy, metricas de precision
 print ('Accuracy from sk-learn: {0}'.format(logreg.score(X_test,Y_test)))
 
-#Gridsearch
+#Gridsearch, metodo para encontrar el mejor valor del parametro C para regresion logistica
 parameters = {'C':np.linspace(0.01,1,10)}
 clf = GridSearchCV(LogisticRegression(solver='lbfgs'),parameters,cv=5)
 clf.fit(X_train,Y_train)
 
-#Best score y parameters
+#Best score y parameters, mejor score y parametros
 print(clf.best_score_)
 print(clf.best_params_)
 
-#Accuracy (tamaño)
+#Accuracy (tamaño), metricas
 print ('Accuracy after GridSearch: {0}'.format(clf.score(X_test,Y_test)))
 
 #Clasificacion Multiclase
@@ -111,7 +111,7 @@ print (logreg_multi.intercept_, logreg.coef_)
 predict_y = logreg_multi.predict(X_test)
 predict_y
 
-#Accuracy
+#Accuracy, metricas
 print ('Accuracy from sk-learn: {0}'.format(logreg_multi.score(X_test,Y_test)))
 
 # Matriz de Confusion 
